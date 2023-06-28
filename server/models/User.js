@@ -27,7 +27,10 @@ const userSchema = new Schema({
         required: true,
     },
 
-    chores: [Chore.schema],
+    chores: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Chore',
+    }],
 });
 
 // set up pre-save middleware to create password
