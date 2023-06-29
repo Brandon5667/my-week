@@ -22,12 +22,6 @@ const choreSchema = new Schema({
     type: Boolean,
     required: true,
   },
-
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
-  },
 });
 
 const Chore = mongoose.model("Chore", choreSchema);
