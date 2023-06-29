@@ -1,29 +1,35 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
 const choreSchema = new Schema({
-    choreName: {
-        type: String,
-        required: true,
-    },
+  choreName: {
+    type: String,
+    required: true,
+  },
 
-    time: {
-        type: Number,
-        required: true,
-    },
+  time: {
+    type: Number,
+    required: true,
+  },
 
-    score: {
-        type: Number,
-        required: true,
-    },
+  score: {
+    type: Number,
+    required: true,
+  },
 
-    completed: {
-        type: Boolean,
-        required: true,
-    },
+  completed: {
+    type: Boolean,
+    required: true,
+  },
+
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
 
-const Chore = mongoose.model('Chore', choreSchema);
+const Chore = mongoose.model("Chore", choreSchema);
 
 module.exports = Chore;
