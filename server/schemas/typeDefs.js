@@ -4,8 +4,8 @@ const typeDefs = gql`
   type Chore {
     _id: ID
     choreName: String!
-    time: Number!
-    score: Number!
+    time: Int!
+    score: Int!
     completed: Boolean!
   }
 
@@ -14,7 +14,7 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
-    score: Number!
+    score: Int!
     chores: [Chore]
   }
 
@@ -37,8 +37,8 @@ const typeDefs = gql`
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
-    addChore(choreName: String!, time: String!, score: Number!): Chore
-    updateChore(choreId: ID!, choreName: String!, time: Number!): Chore
+    addChore(choreName: String!, time: String!, score: Int!): Chore
+    updateChore(choreId: ID!, choreName: String!, time: Int!): Chore
     login(email: String!, password: String!): Auth
   }
 `;

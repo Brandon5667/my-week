@@ -1,7 +1,6 @@
-import {secret, expiration} from 'dotenv/config';
+const { secret, expiration } = require("dotenv/config");
 
-const jwt = require('jsonwebtoken');
-
+const jwt = require("jsonwebtoken");
 
 module.exports = {
   authMiddleware: function ({ req }) {
@@ -10,7 +9,7 @@ module.exports = {
 
     // ["Bearer", "<tokenvalue>"]
     if (req.headers.authorization) {
-      token = token.split(' ').pop().trim();
+      token = token.split(" ").pop().trim();
     }
 
     if (!token) {
@@ -21,7 +20,7 @@ module.exports = {
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
       req.user = data;
     } catch {
-      console.log('Invalid token');
+      console.log("Invalid token");
     }
 
     return req;
