@@ -1,5 +1,7 @@
-const { secret, expiration } = require("dotenv/config");
+// require("dotenv").config();
 
+const secret = "mysecretsshhhhh";
+const expiration = "2h";
 const jwt = require("jsonwebtoken");
 
 module.exports = {

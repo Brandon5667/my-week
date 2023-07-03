@@ -14,7 +14,7 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
-    score: Int!
+    score: Int
     chores: [Chore]
   }
 
