@@ -5,7 +5,7 @@ const typeDefs = gql`
     _id: ID
     choreName: String!
     time: Int!
-    score: Int!
+    score: Int
     completed: Boolean!
   }
 
@@ -21,6 +21,7 @@ const typeDefs = gql`
   type Checkout {
     session: ID
   }
+
 
   type Auth {
     token: ID
