@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Chore } = require("../models");
+const { User, Chore, Survey } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -72,6 +72,25 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+
+    addSurvey: async (parent, { trash, dishes, bathroom, walk, floor }, context) => {
+      if (context.user) {
+        const survey = await Survey.create({
+          trash,
+          dishes,
+          bathroom,
+          walk,
+          floor
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { survey: survey._id } }
+        );
+        return survey;
+      }
+        throw new AuthenticationError("You need to be logged in!");
+    }
   },
 };
 
