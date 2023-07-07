@@ -31,6 +31,14 @@ const userSchema = new Schema({
       ref: "Chore",
     },
   ],
+
+  survey: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Survey"
+    }
+  ]
+  
 });
 
 // set up pre-save middleware to create password
