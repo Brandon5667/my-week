@@ -18,6 +18,15 @@ const typeDefs = gql`
     chores: [Chore]
   }
 
+  type Survey {
+    _id: ID
+    trash: Int!
+    dishes: Int!
+    bathroom: Int!
+    walk: Int!
+    floor: Int!
+  }
+
   type Checkout {
     session: ID
   }
@@ -41,6 +50,7 @@ const typeDefs = gql`
     addChore(choreName: String!, time: String!, score: Int!): Chore
     updateChore(choreId: ID!, choreName: String!, time: Int!): Chore
     login(email: String!, password: String!): Auth
+    addSurvey(trash: Int!, dishes: Int!, bathroom: Int!, walk: Int!, floor: Int!): Survey
   }
 `;
 
