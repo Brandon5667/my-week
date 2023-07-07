@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 //   createHttpLink,
 // } from '@apollo/client';
 // import { setContext }from '@apollo/client/link/context';
-import Profile from './pages/Profile';
+import Profile from './pages/profile';
 import Login from './pages/Login';
 import Chorepage from './pages/Chorepage';
 import HomePage from './pages/HomePage';
@@ -42,15 +42,16 @@ function App() {
   // <ApolloProvider client={client}>
   <>
     <Router>
-      {/* <Navbar> */}
+
         <div className='container'>
+          <Navbar />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/Login" element={<Login />} />
             <Route path="/Profile" element={<Profile />}/>
           </Routes>
         </div>
-      {/* </Navbar> */}
+
     </Router>
   </>
   // </ApolloProvider>
