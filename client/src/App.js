@@ -1,10 +1,18 @@
 import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-//import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
-//import { setContext }from '@apollo/client/link/context';
-import Chorepage from './pages/Chorepage';
 
+// import {
+//   ApolloClient,
+//   InMemoryCache,
+//   ApolloProvider,
+//   createHttpLink,
+// } from '@apollo/client';
+// import { setContext }from '@apollo/client/link/context';
+import Login from './pages/Login';
+import Chorepage from './pages/Chorepage';
+import HomePage from './pages/HomePage';
+import Navbar from './components/Navbar';
 // const httpLink = createHttpLink({
 //   uri: '/graphql',
 // });
@@ -24,12 +32,24 @@ import Chorepage from './pages/Chorepage';
 //   cache: new InMemoryCache(),
 // });
 
+
+
 function App() {
   return (
+  // <ApolloProvider client={client}>
   <>
-    <h1>test 2</h1>
-    <Chorepage/>
-  </>
+    <Router>
+      <Navbar>
+        <div className='container'>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/Login" element={<Login />} />
+          </Routes>
+        </div>
+      </Navbar>
+    </Router>
+    </>
+  // </ApolloProvider>
 );
 }
 
