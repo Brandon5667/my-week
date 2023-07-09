@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
+// import React, { useState } from 'react';
+// import { Link } from 'react-router-dom';
+// import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
+// import SignUpForm from './SignUpForm';
+// import LoginForm from './LoginForm';
 
+// import Auth from '../utils/auth';
 
-import Auth from '../utils/auth';
+// const AppNavbar = () => {
+//   // set modal display state
+//   const [showModal, setShowModal] = useState(false);
 
-const AppNavbar = () => {
-  // set modal display state
-  const [showModal, setShowModal] = useState(false);
+//   return (
 
-  return (
-    <h1>this the navbar</h1>
 //     <>
 //       <Navbar bg='dark' variant='dark' expand='lg'>
 //         <Container fluid>
@@ -27,7 +28,7 @@ const AppNavbar = () => {
 //               {Auth.loggedIn() ? (
 //                 <>
 //                   <Nav.Link as={Link} to='/saved'>
-//                     See Your Books
+//                     See Your Chores
 //                   </Nav.Link>
 //                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
 //                 </>
@@ -71,7 +72,63 @@ const AppNavbar = () => {
 //         </Tab.Container>
 //       </Modal>
 //     </>
+//   );
+// };
+
+// export default AppNavbar;
+
+
+
+
+// or this
+
+
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+import Auth from '../utils/auth';
+
+const Navbar = () => {
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  };
+  return (
+    <header className="bg-info text-dark mb-4 py-3 display-flex align-center">
+      <div className="container flex-column justify-space-between-lg justify-center align-center text-center">
+        <Link className="text-dark" to="/">
+          <h1 className="m-0" style={{ fontSize: '3rem' }}>
+            MyWeek
+          </h1>
+        </Link>
+        <p className="m-0" style={{ fontSize: '1.75rem', fontWeight: '700' }}>
+          A place to organize your week
+        </p>
+        <div>
+          {Auth.loggedIn() ? (
+            <>
+              <Link className="btn btn-lg btn-primary m-2" to="/me">
+                View My Profile
+              </Link>
+              <button className="btn btn-lg btn-light m-2" onClick={logout}>
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link className="btn btn-lg btn-primary m-2" to="/login">
+                Login
+              </Link>
+              <Link className="btn btn-lg btn-light m-2" to="/signup">
+                Signup
+              </Link>
+            </>
+          )}
+        </div>
+      </div>
+    </header>
   );
 };
 
-export default AppNavbar;
+export default Navbar;
