@@ -12,11 +12,12 @@ const HomePage = () => {
   return (
     <Container className="d-flex justify-content-center align-items-center" style={styles.container}>
       <Row >
-        <Col className="text-center" xs={12} md={6} style={styles.half}>
+        <div style={styles.half}>
+        <Col className="text-center" xs={12} md={6} style={styles.left}>
           <h1 style={styles.title}>MyWeek</h1>
           <p style={styles.description}>Tired of traditional chore management methods that lack motivation and excitement? MyWeek brings a refreshing twist by introducing a points-based system, allowing you to assign points to each chore based on its difficulty or importance. By adding an element of competition, MyWeek encourages users to strive for excellence and surpass their own expectations.</p>
         </Col>
-        
+        </div>
         
         {/* <Col className="text-right" xs={12} md={6} style={styles.right}>
           <img
@@ -25,14 +26,15 @@ const HomePage = () => {
             style={styles.image}
           />
         </Col> */}
-        
-        <Col className="text-center" xs={12} style={styles.half}>
+        <div style={styles.halfRacoon}>
+        <Col  xs={12} style={styles.right}>
         <img
             src="./racoon-sweeping.png"
             alt="racoon-sweeping"
             style={styles.image}
           />
-        <div>
+        
+          <div style={styles.racoonBTN}>
           {Auth.loggedIn() ? (
             <>
               <Link className="btn btn-lg btn-primary m-2" to="/me">
@@ -54,6 +56,7 @@ const HomePage = () => {
           )}
         </div>
         </Col>
+        </div>
       </Row>
     </Container>
   );
@@ -61,8 +64,16 @@ const HomePage = () => {
 
 const styles = {
 
+  racoonBTN:{
+    marginLeft: '120px'
+},
+
   half: {
-    width: '30%',
+    width: '75%',
+  },
+
+  halfRacoon: {
+    width: '24%',
   },
   container: {
     height: '100vh',
@@ -71,8 +82,9 @@ const styles = {
     marginRight: '20px',
   },
   title: {
-    fontSize: '48px',
+    fontSize: '90px',
     fontWeight: 'bold',
+    paddingBottom: '20px',
   },
   description: {
     fontSize: '18px',
