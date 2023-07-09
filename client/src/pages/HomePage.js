@@ -4,25 +4,55 @@ import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
 
 const HomePage = () => {
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  };
 
   return (
     <Container className="d-flex justify-content-center align-items-center" style={styles.container}>
       <Row>
-        <Col className="text-left" xs={12} md={6} style={styles.left}>
+        <Col className="text-center" xs={12} md={6} style={styles.left}>
           <h1 style={styles.title}>MyWeek</h1>
-          <p style={styles.description}>This is a placeholder</p>
-        </Col>  
-        <Col className="text-right" xs={12} md={6} style={styles.right}>
+          <p style={styles.description}>Tired of traditional chore management methods that lack motivation and excitement? MyWeek brings a refreshing twist by introducing a points-based system, allowing you to assign points to each chore based on its difficulty or importance. By adding an element of competition, MyWeek encourages users to strive for excellence and surpass their own expectations.</p>
+        </Col>
+        </Row>
+        
+        {/* <Col className="text-right" xs={12} md={6} style={styles.right}>
           <img
             src="./racoon-sweeping.png"
             alt="racoon-sweeping"
             style={styles.image}
           />
-        </Col>
+        </Col> */}
+        <Row>
         <Col className="text-center" xs={12}>
-          <Button variant="primary" style={styles.loginButton}>
-            Login or Signup
-          </Button>
+        <img
+            src="./racoon-sweeping.png"
+            alt="racoon-sweeping"
+            style={styles.image}
+          />
+        <div>
+          {Auth.loggedIn() ? (
+            <>
+              <Link className="btn btn-lg btn-primary m-2" to="/me">
+                View My Profile
+              </Link>
+              <button className="btn btn-lg btn-light m-2" onClick={logout}>
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link className="btn btn-lg btn-primary m-2" to="/login">
+                Login
+              </Link>
+              <Link className="btn btn-lg btn-light m-2" to="/signup">
+                Signup
+              </Link>
+            </>
+          )}
+        </div>
         </Col>
       </Row>
     </Container>
