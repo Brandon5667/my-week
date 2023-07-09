@@ -1,6 +1,13 @@
-import './App.css';
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import "./App.css";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 
 // import {
 //   ApolloClient,
@@ -9,49 +16,40 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 //   createHttpLink,
 // } from '@apollo/client';
 // import { setContext }from '@apollo/client/link/context';
+import Profile from './pages/profile';
 import Login from './pages/Login';
 import Chorepage from './pages/Chorepage';
 import HomePage from './pages/HomePage';
 import Navbar from './components/Navbar';
+
+
 // const httpLink = createHttpLink({
 //   uri: '/graphql',
 // });
 
-// const authLink = setContext((_, { headers }) => {
-//   const token = localStorage.getItem('id_token');
-//   return {
-//     headers: {
-//       ...headers,
-//       authorization: token ? `Bearer ${token}` : '',
-//     },
-//   };
-// });
-
-// const client = new ApolloClient({
-//   link: authLink.concat(httpLink),
-//   cache: new InMemoryCache(),
-// });
-
-
+const client = new ApolloClient({
+  // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
 
 function App() {
   return (
   // <ApolloProvider client={client}>
   <>
     <Router>
-      <Navbar>
+
         <div className='container'>
-          </div>
-        </Navbar>
+          <Navbar />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/Login" element={<Login />} />
-            
+            <Route path="/Profile" element={<Profile />}/>
           </Routes>
-      
-     
+        </div>
+
     </Router>
-    </>
+  </>
   // </ApolloProvider>
 );
 }
