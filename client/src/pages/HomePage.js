@@ -11,12 +11,12 @@ const HomePage = () => {
 
   return (
     <Container className="d-flex justify-content-center align-items-center" style={styles.container}>
-      <Row>
-        <Col className="text-center" xs={12} md={6} style={styles.left}>
+      <Row >
+        <Col className="text-center" xs={12} md={6} style={styles.half}>
           <h1 style={styles.title}>MyWeek</h1>
           <p style={styles.description}>Tired of traditional chore management methods that lack motivation and excitement? MyWeek brings a refreshing twist by introducing a points-based system, allowing you to assign points to each chore based on its difficulty or importance. By adding an element of competition, MyWeek encourages users to strive for excellence and surpass their own expectations.</p>
         </Col>
-        </Row>
+        
         
         {/* <Col className="text-right" xs={12} md={6} style={styles.right}>
           <img
@@ -25,8 +25,8 @@ const HomePage = () => {
             style={styles.image}
           />
         </Col> */}
-        <Row>
-        <Col className="text-center" xs={12}>
+        
+        <Col className="text-center" xs={12} style={styles.half}>
         <img
             src="./racoon-sweeping.png"
             alt="racoon-sweeping"
@@ -60,6 +60,10 @@ const HomePage = () => {
 };
 
 const styles = {
+
+  half: {
+    width: '30%',
+  },
   container: {
     height: '100vh',
   },
