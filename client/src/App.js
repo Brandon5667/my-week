@@ -15,6 +15,7 @@ import Chorepage from "./pages/Chorepage";
 import HomePage from "./pages/HomePage";
 import Navbar from "./components/Navbar";
 import Signup from "./pages/Signup";
+import Survey from "./pages/Survey";
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -51,6 +52,7 @@ function App() {
             <Route path="/Login" element={<Login />} />
             <Route path="/Profile" element={<Profile />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/survey" element={<Survey />} />
           </Routes>
         </div>
       </Router>
