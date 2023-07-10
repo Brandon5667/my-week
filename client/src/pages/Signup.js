@@ -33,9 +33,12 @@ const Signup = () => {
       });
 
       Auth.login(data.addUser.token);
+      window.location.assign('/survey');
     } catch (e) {
       console.error(e);
     }
+
+    
   };
 
   return (
