@@ -1,3 +1,7 @@
+/* *{
+  background-color:#D6CDBB;
+} */
+
 .App {
   text-align: center;
 }
@@ -36,3 +40,61 @@
     transform: rotate(360deg);
   }
 }
+
+.chore-page {
+  margin: 1%;
+}
+
+#survey-submit-button {
+  margin:7%;
+  font-size: 200%;
+}
+
+#survey-page {
+  text-align: center;
+}
+
+#survey-form {
+  
+}
+
+#survey-form * {
+  margin: 1%;
+  /* background-color: red; */
+}
+
+option {
+  /* background-color: green; */
+}
+
+#chore-1 {
+  width: 25%;
+  height: 20%;
+  font-size: 180%;
+  padding: 1%;
+  
+  /* background-color: green; */
+}
+
+#chore-2 {
+  width: 20%;
+  font-size: 200%;
+  /* background-color: green; */
+}
+#chore-3 {
+  width: 20%;
+  font-size: 200%;
+  /* background-color: green; */
+}
+
+#chore-4 {
+  width: 20%;
+  font-size: 200%;
+  /* background-color: green; */
+}
+#chore-5 {
+  width: 20%;
+  font-size: 200%;
+  /* background-color: green; */
+}
+
