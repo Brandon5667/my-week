@@ -33,6 +33,18 @@ export const ADD_CHORE = gql`
   }
 `;
 
+export const ADD_SURVEY = gql`
+  mutation Mutation($trash: Int!, $bathroom: Int!, $walk: Int!, $floor: Int!, $dishes: Int!) {
+    addSurvey(trash: $trash, bathroom: $bathroom, walk: $walk, floor: $floor, dishes: $dishes) {
+      bathroom
+      dishes
+      floor
+      trash
+      walk
+    }
+  }
+`;
+
 // FIX:
 // export const UPDATE_CHORE = gql`
 //     mutation updateChore( ch) {
