@@ -123,7 +123,17 @@ const Chorepage = () => {
                     </Modal>
                 </>
             </div>
-            
+             <div>
+      <h1>All Chores</h1>
+      {data.chores.map((chore) => (
+        <div key={chore.id}>
+          <h2>{chore.choreName}</h2>
+          <p>{chore.time}</p>
+          <Button>Complete</Button>
+        </div>
+      ))}
+    </div>
+
             {/* <div className="col-12 col-md-8 mb-3">
                 {loading ? (
                     <div>Loading...</div>
