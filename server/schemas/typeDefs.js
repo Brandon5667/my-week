@@ -5,7 +5,8 @@ const typeDefs = gql`
     _id: ID
     choreName: String!
     time: Int!
-    score: Int
+    day: Int!
+    score: Int!
     completed: Boolean!
   }
 
@@ -31,7 +32,6 @@ const typeDefs = gql`
     session: ID
   }
 
-
   type Auth {
     token: ID
     user: User
@@ -47,10 +47,22 @@ const typeDefs = gql`
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
-    addChore(choreName: String!, time: String!, score: Int!): Chore
-    updateChore(choreId: ID!, choreName: String!, time: Int!): Chore
+    addChore(choreName: String!, time: Int!, score: Int!, day: Int!): Chore
+    updateChore(
+      choreId: ID!
+      choreName: String!
+      time: Int!
+      score: Int!
+      day: Int!
+    ): Chore
     login(email: String!, password: String!): Auth
-    addSurvey(trash: Int!, dishes: Int!, bathroom: Int!, walk: Int!, floor: Int!): Survey
+    addSurvey(
+      trash: Int!
+      dishes: Int!
+      bathroom: Int!
+      walk: Int!
+      floor: Int!
+    ): Survey
   }
 `;
 

@@ -11,6 +11,15 @@ const choreSchema = new Schema({
   time: {
     type: Number,
     required: true,
+    min: 0,
+    max: 24,
+  },
+
+  day: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 7,
   },
 
   score: {
