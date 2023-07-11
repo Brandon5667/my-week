@@ -24,8 +24,8 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_CHORE = gql`
-  mutation addchore($choreName: ID!, $time: String!, $score: Int!) {
-    addChore(choreName: $choreName, time: $time, score: $score) {
+  mutation addChore($choreName: ID!, $time: String!, $score: Int!, $day: Int!) {
+    addChore(choreName: $choreName, time: $time, score: $score, day: $day) {
       _id
       choreName
       time
@@ -34,8 +34,20 @@ export const ADD_CHORE = gql`
 `;
 
 export const ADD_SURVEY = gql`
-  mutation Mutation($trash: Int!, $bathroom: Int!, $walk: Int!, $floor: Int!, $dishes: Int!) {
-    addSurvey(trash: $trash, bathroom: $bathroom, walk: $walk, floor: $floor, dishes: $dishes) {
+  mutation Mutation(
+    $trash: Int!
+    $bathroom: Int!
+    $walk: Int!
+    $floor: Int!
+    $dishes: Int!
+  ) {
+    addSurvey(
+      trash: $trash
+      bathroom: $bathroom
+      walk: $walk
+      floor: $floor
+      dishes: $dishes
+    ) {
       bathroom
       dishes
       floor
@@ -45,6 +57,9 @@ export const ADD_SURVEY = gql`
   }
 `;
 
+// export const COMPLETE_CHORE = gql`
+//   mutation
+// `;
 // FIX:
 // export const UPDATE_CHORE = gql`
 //     mutation updateChore( ch) {
