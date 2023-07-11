@@ -7,7 +7,7 @@ import { Dropdown, Card, ButtonGroup, Button, Modal, Form } from 'react-bootstra
 import { GET_ME } from '../utils/queries';
 import { GET_CHORES } from '../utils/queries';
 import { ADD_CHORE } from '../utils/mutations';
-
+import { COMPLETE_CHORE } from '../utils/mutations';
 // import ChorePopup from '../components/ChorePopup';
 //sort by time
 
@@ -20,12 +20,15 @@ const Chorepage = () => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
     const [formState, setFormState] = useState({
         choreName: "",
         time: "",
         // day: ""
     });
+
+    const handleComplete = async (event) => {
+        
+    }
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -129,6 +132,16 @@ const Chorepage = () => {
                     </Modal>
                 </>
             </div>
+             <div>
+      <h1>All Chores</h1>
+      {data.chores.map((chore) => (
+        <div key={chore.id}>
+          <h2>{chore.choreName}</h2>
+          <p>{chore.time}</p>
+          <Button onClick={handleComplete}>Complete</Button>
+        </div>
+      ))}
+    </div>
 
             {/* <div className="col-12 col-md-8 mb-3">
                 {loading ? (
