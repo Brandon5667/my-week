@@ -51,6 +51,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/survey" element={<Survey />} />
+            <Route path="/chorepage" element={<Chorepage />} />
           </Routes>
         </div>
       </Router>
