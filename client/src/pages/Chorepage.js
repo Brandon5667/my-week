@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import ChoreBlock from '../components/ChoreBlock';
 import { Navigate, useParams } from 'react-router-dom';
 import Auth from '../utils/auth';
 import { useQuery, useMutation } from '@apollo/client';
 import { Dropdown, Card, ButtonGroup, Button, Modal, Form } from 'react-bootstrap';
-// import { GET_ME } from '../utils/queries';
+import { GET_ME } from '../utils/queries';
 import { GET_CHORES } from '../utils/queries';
 import { ADD_CHORE } from '../utils/mutations';
 import { COMPLETE_CHORE } from '../utils/mutations';
@@ -12,6 +12,7 @@ import { COMPLETE_CHORE } from '../utils/mutations';
 //sort by time
 
 const Chorepage = () => {
+    console.log();
 
     // const { loading, data } = useQuery(GET_CHORES);
     // const chores = data?.chores || [];
@@ -19,13 +20,17 @@ const Chorepage = () => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+<<<<<<< HEAD
     const [addChore, { error, data }] = useMutation(ADD_CHORE);
     const [completeChore, { error, data }] = useMutation(COMPLETE_CHORE);
+=======
+
+>>>>>>> affb7f018fbc13e0577b2e25ee06c460fdd8fbc1
     const [formState, setFormState] = useState({
         choreName: "",
         time: "",
-        day: ""
-      });
+        // day: ""
+    });
 
     const handleComplete = async (event) => {
         
@@ -33,26 +38,32 @@ const Chorepage = () => {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-    
-        setFormState({
-          ...formState,
-          [name]: (value),
-        });
-      };
 
-      const handleFormSubmit = async (event) => {
+        setFormState({
+            ...formState,
+            [name]: (value),
+        });
+    };
+
+    const [addChore, { error, data }] = useMutation(ADD_CHORE);
+
+
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log(formState);
-        handleChange();
-    
+
         try {
-          const { data } = await addChore({
-            variables: { ...formState },
-          });
+            const { data } = await addChore({
+                variables: { ...formState, score: 1,  },
+
+            });
+            console.log(formState);
+            setShow(false)
+            
+
         } catch (e) {
             console.error(e);
-          }
-        };
+        }
+    };
 
 
 
@@ -127,6 +138,7 @@ const Chorepage = () => {
                     </Modal>
                 </>
             </div>
+<<<<<<< HEAD
              <div>
       <h1>All Chores</h1>
       {data.chores.map((chore) => (
@@ -137,6 +149,8 @@ const Chorepage = () => {
         </div>
       ))}
     </div>
+=======
+>>>>>>> affb7f018fbc13e0577b2e25ee06c460fdd8fbc1
 
             {/* <div className="col-12 col-md-8 mb-3">
                 {loading ? (
