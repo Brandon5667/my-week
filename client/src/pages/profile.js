@@ -1,10 +1,11 @@
-import React from 'react';
 import React, { useState, useEffect } from 'react';
-// import ChoreBlock from '../components/ChoreBlock';
-import {GET_ME} from '../utils/queries'
+ import {GET_ME} from '../utils/queries'
+import { useQuery } from '@apollo/client';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 
 const Profile = () =>{
   const { loading, error, data } = useQuery(GET_ME);
+
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
 
@@ -22,19 +23,26 @@ const Profile = () =>{
   if (error) {
     return <p>Error: {error.message}</p>;
   }
+
     return(
-        <div>
-            <h2>Profile</h2>
-            <p>Username:{username}</p>
-            <p>Email:{email}</p>
-            <h3>Assigned Chores:</h3>
-            <ul>
-                {chores.map((chore) => (
-                  <li key={chore.id}>{chore.name}</li>
-                ))}
-            </ul>
-            {/* <button onClick={deleteAccount}>Delete Account</button> */}
-        </div>
+      <Container>
+      <Row className="mt-4">
+        <Col>
+          <h2>Profile</h2>
+          <div className="mb-3">
+            <label className="form-label">Username:</label>
+            <p className="card-text">{username}</p>
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Email:</label>
+            <p className="card-text">{email}</p>
+          </div>
+          <Button variant="danger">
+            Delete Account 
+          </Button>
+        </Col>
+      </Row>
+    </Container>
     )
 }
 
