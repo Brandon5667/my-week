@@ -24,11 +24,11 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_CHORE = gql`
-  mutation addchore($choreName: ID!, $time: String!, $score: Int!) {
+  mutation addchore($choreName: String!, $time: String!, $score: Int!) {
     addChore(choreName: $choreName, time: $time, score: $score) {
-      _id
       choreName
       time
+      score
     }
   }
 `;
