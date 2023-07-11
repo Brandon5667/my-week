@@ -20,12 +20,6 @@ const Chorepage = () => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-<<<<<<< HEAD
-    const [addChore, { error, data }] = useMutation(ADD_CHORE);
-    const [completeChore, { error, data }] = useMutation(COMPLETE_CHORE);
-=======
-
->>>>>>> affb7f018fbc13e0577b2e25ee06c460fdd8fbc1
     const [formState, setFormState] = useState({
         choreName: "",
         time: "",
@@ -138,7 +132,6 @@ const Chorepage = () => {
                     </Modal>
                 </>
             </div>
-<<<<<<< HEAD
              <div>
       <h1>All Chores</h1>
       {data.chores.map((chore) => (
@@ -149,8 +142,6 @@ const Chorepage = () => {
         </div>
       ))}
     </div>
-=======
->>>>>>> affb7f018fbc13e0577b2e25ee06c460fdd8fbc1
 
             {/* <div className="col-12 col-md-8 mb-3">
                 {loading ? (
