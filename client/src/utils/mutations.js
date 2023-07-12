@@ -36,14 +36,6 @@ export const ADD_CHORE = gql`
   }
 `;
 
-/*
-mutation AddChore($choreName: String!, $time: Int!, $score: Int!, $day: Int!) {
-  addChore(choreName: $choreName, time: $time, score: $score, day: $day) {
-    _id
-  }
-}
-*/
-
 export const ADD_SURVEY = gql`
   mutation Mutation(
     $trash: Int!
@@ -68,9 +60,13 @@ export const ADD_SURVEY = gql`
   }
 `;
 
-// export const COMPLETE_CHORE = gql`
-//   mutation
-// `;
+export const COMPLETE_CHORE = gql`
+  mutation CompleteChore($choreId: ID!) {
+    completeChore(choreId: $choreId) {
+      score
+    }
+  }
+`;
 // FIX:
 // export const UPDATE_CHORE = gql`
 //     mutation updateChore( ch) {

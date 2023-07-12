@@ -4,16 +4,17 @@ const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    chores: async (parent, { username }) => {
-      const params = username ? { username } : {};
-      return Chore.find(params).sort({ createdAt: -1 });
-    },
     chore: async (parent, { choreId }) => {
       return Chore.findOne({ _id: choreId });
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id });
+        return User.findOne({ _id: context.user._id })
+          .populate({
+            path: "chores",
+            options: { sort: { day: 1, time: 1 } },
+          })
+          .populate("survey");
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -78,16 +79,19 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    // completeChore: async (parent, { choreId }, context) => {
-    //   if (context.user) {
-    //     const chore = await Chore.findById(choreId);
-    //     await User.findOneAndUpdate(
-    //       { _id: context.user._id },
-    //       { $inc: { score: chore.score } }
-    //     );
-    //     await Chore.findByIdAndDelete(choreId);
-    //   }
-    // },
+    completeChore: async (parent, { choreId }, context) => {
+      if (context.user) {
+        const chore = await Chore.findByIdAndUpdate(choreId, {
+          completed: true,
+        });
+        const user = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $inc: { score: chore.score } },
+          { new: true, runValidators: true }
+        );
+        return user;
+      }
+    },
 
     addSurvey: async (
       parent,
@@ -105,7 +109,7 @@ const resolvers = {
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { survey: survey._id } }
+          { survey: survey._id }
         );
         return survey;
       }
