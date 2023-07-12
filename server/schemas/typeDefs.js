@@ -17,6 +17,7 @@ const typeDefs = gql`
     password: String!
     score: Int
     chores: [Chore]
+    survey: [Survey]
   }
 
   type Survey {

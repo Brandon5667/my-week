@@ -21,6 +21,7 @@ const Chorepage = () => {
   const { loading, data: userData } = useQuery(GET_ME);
   // get chores from userData
   const chores = userData?.me?.chores;
+  const survey = userData?.me?.survey[0];
 
   const days = [
     "Monday",
@@ -71,12 +72,16 @@ const Chorepage = () => {
     event.preventDefault();
 
     try {
+      console.log(formState.choreName);
+      const score = survey[formState.choreName];
+      console.log("The survey score:", score);
+
       const { data } = await addChore({
         variables: {
           choreName: formState.choreName,
           time: formState.time * 1,
           day: formState.day * 1,
-          score: 1,
+          score: score * 1,
         },
       });
       console.log(formState);
@@ -106,11 +111,11 @@ const Chorepage = () => {
                 aria-label="Default select example"
               >
                 <option>Open this select menu</option>
-                <option value="Trash">Trash</option>
-                <option value="Dishes">Dishes</option>
-                <option value="Bathroom">Bathroom</option>
-                <option value="Walk">Walk</option>
-                <option value="Floor">Floor</option>
+                <option value="trash">Trash</option>
+                <option value="dishes">Dishes</option>
+                <option value="bathroom">Bathroom</option>
+                <option value="walk">Walk</option>
+                <option value="floor">Floor</option>
               </Form.Select>
             </Modal.Header>
             <Modal.Body>

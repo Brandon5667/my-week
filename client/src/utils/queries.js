@@ -20,6 +20,13 @@ export const GET_ME = gql`
         score
         completed
       }
+      survey {
+        trash
+        dishes
+        bathroom
+        walk
+        floor
+      }
     }
   }
 `;

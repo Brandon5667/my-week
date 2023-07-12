@@ -9,10 +9,12 @@ const resolvers = {
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate({
-          path: "chores",
-          options: { sort: { day: 1, time: 1 } },
-        });
+        return User.findOne({ _id: context.user._id })
+          .populate({
+            path: "chores",
+            options: { sort: { day: 1, time: 1 } },
+          })
+          .populate("survey");
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -104,7 +106,7 @@ const resolvers = {
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { survey: survey._id } }
+          { survey: survey._id }
         );
         return survey;
       }
