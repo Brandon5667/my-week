@@ -24,14 +24,25 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_CHORE = gql`
-  mutation addchore($choreName: String!, $time: String!, $score: Int!) {
-    addChore(choreName: $choreName, time: $time, score: $score) {
-      choreName
-      time
-      score
+  mutation AddChore(
+    $choreName: String!
+    $time: Int!
+    $score: Int!
+    $day: Int!
+  ) {
+    addChore(choreName: $choreName, time: $time, score: $score, day: $day) {
+      _id
     }
   }
 `;
+
+/*
+mutation AddChore($choreName: String!, $time: Int!, $score: Int!, $day: Int!) {
+  addChore(choreName: $choreName, time: $time, score: $score, day: $day) {
+    _id
+  }
+}
+*/
 
 export const ADD_SURVEY = gql`
   mutation Mutation(
