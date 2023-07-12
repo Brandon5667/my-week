@@ -78,3 +78,15 @@ export const COMPLETE_CHORE = gql`
 //         }
 //     }
 // `;
+
+
+// delete user mutation
+export const DELETE_USER = gql`
+  mutation deleteAccount {
+    deleteAccount {
+      _id
+      username
+      email
+    }
+  }
+`;

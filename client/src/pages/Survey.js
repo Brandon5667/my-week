@@ -32,7 +32,7 @@ const Survey = () => {
       const { data } = await addSurvey({
         variables: { ...formState },
       });
-      window.location.assign('/');
+      window.location.assign('/chorepage');
 
       
     } catch (e) {

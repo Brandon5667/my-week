@@ -1,6 +1,27 @@
 /* *{
   background-color:#D6CDBB;
 } */
+/* .footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.footer-image {
+  max-width: 100%;
+  max-height: 100px;
+  width: auto;
+  height: auto;
+} */
+
+.form-select {
+  margin: 10px;
+}
+
+.modal-container {
+  border: 3px solid #000;
+}
 
 .App {
   text-align: center;
@@ -78,14 +99,8 @@
   margin: 2%;
 }
 
-#survey-page > h1 {
-  vertical-align: middle;
-  font-size: 5vh;
-}
-
-#survey-form > h2 {
-  font-size: 4vh;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+#survey-form {
+  
 }
 
 #survey-form * {
@@ -97,25 +112,13 @@ option {
   /* background-color: green; */
 }
 
-/* #chore-1 {
-  width: 20%;
-  font-size: 3vh;
-  box-shadow: 10px 5px 5px rgb(89, 97, 93);
+#chore-1 {
+  width: 25%;
+  height: 20%;
+  font-size: 180%;
+  padding: 1%;
   
-} */
-
-#chore-1{
-  background-color: rgb(88, 184, 157);
-  color: white;
-  padding: 12px;
-  width: 250px;
-  border: none;
-  border-radius: 25px;
-  font-size: 25px;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-  -webkit-appearance: button;
-  appearance: button;
-  outline: none;
+  /* background-color: green; */
 }
 
 #chore-2 {
@@ -171,4 +174,49 @@ option {
   appearance: button;
   outline: none;
 }
+
+.profile-card {
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin: auto;
+}
+
+.profile-heading {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.profile-info {
+  margin-bottom: 15px;
+}
+
+.card-text {
+  font-size: 18px;
+  color: #333;
+}
+
+.profile-button {
+  background-color: #dc3545;
+  border: none;
+  padding: 10px 20px;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.profile-button:hover {
+  background-color: #c82333;
+}
+
+.profile-button:focus {
+  outline: none;
+}
+
 
