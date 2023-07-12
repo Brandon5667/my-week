@@ -17,6 +17,7 @@ const typeDefs = gql`
     password: String!
     score: Int
     chores: [Chore]
+    survey: [Survey]
   }
 
   type Survey {
@@ -64,6 +65,7 @@ const typeDefs = gql`
       walk: Int!
       floor: Int!
     ): Survey
+    completeChore(choreId: ID!): User
   }
 `;
 
