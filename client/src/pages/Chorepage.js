@@ -118,7 +118,7 @@ const Chorepage = () => {
         </Col>
       </Row>
       <Row>
-        <Col>
+        <Col xs={12} lg={5}>
           <Button type="submit" onClick={handleShow}>
             ADD CHORE
           </Button>
@@ -175,7 +175,7 @@ const Chorepage = () => {
             </Button>
           </div>
         </Col>
-        <Col>
+        <Col xs={12} lg={5}>
           <div>
             {loading ? <h2>Loading...</h2> : <h1>All Chores</h1>}
 
