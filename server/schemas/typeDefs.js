@@ -55,6 +55,7 @@ const typeDefs = gql`
       score: Int!
       day: Int!
     ): Chore
+    deleteAccount: User
     login(email: String!, password: String!): Auth
     addSurvey(
       trash: Int!

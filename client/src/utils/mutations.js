@@ -82,3 +82,15 @@ export const ADD_SURVEY = gql`
 //         }
 //     }
 // `;
+
+
+// delete user mutation
+export const DELETE_USER = gql`
+  mutation deleteAccount {
+    deleteAccount {
+      _id
+      username
+      email
+    }
+  }
+`;
