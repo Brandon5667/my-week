@@ -36,6 +36,10 @@ const Chorepage = () => {
     "Sunday",
   ];
 
+  const today = new Date();
+  const todayWeekday = today.getDay();
+  console.log(todayWeekday);
+
   const timeOptions = [];
   for (var i = 1; i < 25; i++) {
     timeOptions.push(
@@ -170,27 +174,31 @@ const Chorepage = () => {
         </Col>
         <Col>
           <div>
-            {loading ? <h2>Loading...</h2> : <h1>All Chores</h1>}
+            {loading ? <h2>Loading...</h2> : <h1>Due Today</h1>}
 
             {chores &&
-              chores.map((chore) => {
-                return (
-                  <Card key={chore._id}>
-                    <Card.Header>{chore.choreName}</Card.Header>
-                    <Card.Body>
-                      <Card.Text>
-                        {days[chore.day - 1]} at{" "}
-                        {chore.time < 13 ? chore.time : chore.time - 12}
-                        {chore.time < 12 || chore.time == 24 ? "am" : "pm"}
-                      </Card.Text>
-                      <Button>Update</Button>
-                      <Button onClick={() => handleCompleteChore(chore._id)}>
-                        Complete
-                      </Button>
-                    </Card.Body>
-                  </Card>
-                );
-              })}
+              chores
+                // .filter((chore) => {
+                //   return chore.completed == false && chore.day == todayWeekday;
+                // })
+                .map((chore) => {
+                  return (
+                    <Card key={chore._id}>
+                      <Card.Header>{chore.choreName}</Card.Header>
+                      <Card.Body>
+                        <Card.Text>
+                          {days[chore.day - 1]} at{" "}
+                          {chore.time < 13 ? chore.time : chore.time - 12}
+                          {chore.time < 12 || chore.time == 24 ? "am" : "pm"}
+                        </Card.Text>
+                        <Button>Update</Button>
+                        <Button onClick={() => handleCompleteChore(chore._id)}>
+                          Complete
+                        </Button>
+                      </Card.Body>
+                    </Card>
+                  );
+                })}
           </div>
         </Col>
       </Row>
