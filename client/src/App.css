@@ -1,7 +1,19 @@
 /* *{
   background-color:#D6CDBB;
 } */
+/* .footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
 
+.footer-image {
+  max-width: 100%;
+  max-height: 100px;
+  width: auto;
+  height: auto;
+} */
 .App {
   text-align: center;
 }
