@@ -100,8 +100,7 @@ const Chorepage = () => {
           score: score * 1,
         },
       });
-      console.log(formState);
-      setShow(false);
+      handleClose();
     } catch (e) {
       console.error(e);
     }
@@ -164,13 +163,7 @@ const Chorepage = () => {
               })}
             </Form.Select>
             <br />
-            <Button
-              variant="primary"
-              onClick={() => {
-                handleFormSubmit();
-                handleClose();
-              }}
-            >
+            <Button variant="primary" onClick={handleFormSubmit}>
               Save Chore
             </Button>
           </div>
