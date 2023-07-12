@@ -60,9 +60,13 @@ export const ADD_SURVEY = gql`
   }
 `;
 
-// export const COMPLETE_CHORE = gql`
-//   mutation
-// `;
+export const COMPLETE_CHORE = gql`
+  mutation CompleteChore($choreId: ID!) {
+    completeChore(choreId: $choreId) {
+      score
+    }
+  }
+`;
 // FIX:
 // export const UPDATE_CHORE = gql`
 //     mutation updateChore( ch) {

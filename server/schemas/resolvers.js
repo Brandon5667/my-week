@@ -79,16 +79,19 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    // completeChore: async (parent, { choreId }, context) => {
-    //   if (context.user) {
-    //     const chore = await Chore.findById(choreId);
-    //     await User.findOneAndUpdate(
-    //       { _id: context.user._id },
-    //       { $inc: { score: chore.score } }
-    //     );
-    //     await Chore.findByIdAndDelete(choreId);
-    //   }
-    // },
+    completeChore: async (parent, { choreId }, context) => {
+      if (context.user) {
+        const chore = await Chore.findByIdAndUpdate(choreId, {
+          completed: true,
+        });
+        const user = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $inc: { score: chore.score } },
+          { new: true, runValidators: true }
+        );
+        return user;
+      }
+    },
 
     addSurvey: async (
       parent,

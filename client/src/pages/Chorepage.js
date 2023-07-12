@@ -53,7 +53,20 @@ const Chorepage = () => {
     day: "",
   });
 
-  const handleComplete = async (event) => {};
+  // Handling for completing a chore
+  const [completeChore, { error: completeChoreError }] = useMutation(
+    COMPLETE_CHORE,
+    {
+      refetchQueries: [{ query: GET_ME }],
+    }
+  );
+  const handleCompleteChore = async (choreId) => {
+    try {
+      const { data } = await completeChore({ variables: { choreId } });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -170,7 +183,9 @@ const Chorepage = () => {
                     {chore.time < 12 || chore.time == 24 ? "am" : "pm"}
                   </Card.Text>
                   <Button>Update</Button>
-                  <Button onClick={handleComplete}>Complete</Button>
+                  <Button onClick={() => handleCompleteChore(chore._id)}>
+                    Complete
+                  </Button>
                 </Card.Body>
               </Card>
             );

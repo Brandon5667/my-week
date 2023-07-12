@@ -64,6 +64,7 @@ const typeDefs = gql`
       walk: Int!
       floor: Int!
     ): Survey
+    completeChore(choreId: ID!): User
   }
 `;
 
