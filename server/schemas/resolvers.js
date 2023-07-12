@@ -44,11 +44,12 @@ const resolvers = {
       return { token, user };
     },
 
-    addChore: async (parent, { choreName, time, score }, context) => {
+    addChore: async (parent, { choreName, time, day, score }, context) => {
       if (context.user) {
         const chore = await Chore.create({
           choreName,
           time,
+          day,
           score,
         });
 
@@ -62,25 +63,44 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    updateChore: async (parent, { choreId, choreName, time }, context) => {
+    updateChore: async (
+      parent,
+      { choreId, choreName, time, day, score },
+      context
+    ) => {
       if (context.user) {
         await Chore.findByIdAndUpdate(
           choreId,
-          { choreName, time },
+          { choreName, time, day, score },
           { new: true }
         );
       }
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    addSurvey: async (parent, { trash, dishes, bathroom, walk, floor }, context) => {
+    // completeChore: async (parent, { choreId }, context) => {
+    //   if (context.user) {
+    //     const chore = await Chore.findById(choreId);
+    //     await User.findOneAndUpdate(
+    //       { _id: context.user._id },
+    //       { $inc: { score: chore.score } }
+    //     );
+    //     await Chore.findByIdAndDelete(choreId);
+    //   }
+    // },
+
+    addSurvey: async (
+      parent,
+      { trash, dishes, bathroom, walk, floor },
+      context
+    ) => {
       if (context.user) {
         const survey = await Survey.create({
           trash,
           dishes,
           bathroom,
           walk,
-          floor
+          floor,
         });
 
         await User.findOneAndUpdate(
@@ -89,8 +109,8 @@ const resolvers = {
         );
         return survey;
       }
-        throw new AuthenticationError("You need to be logged in!");
-    }
+      throw new AuthenticationError("You need to be logged in!");
+    },
   },
 };
 

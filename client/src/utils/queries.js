@@ -1,16 +1,16 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 // export const GET_CHORES = gql`
-//     query chores {
-//         chores{
-//             _id
-//             choreName
-//             completed
-//             score
-//             time
-//         }
+//   query chores {
+//     chores {
+//       _id
+//       choreName
+//       completed
+//       score
+//       time
 //     }
-// `
+//   }
+// `;
 
 // export const GET_CHORE = gql`
 //     query chore($choreId: ID!){
@@ -19,9 +19,10 @@ import { gql } from '@apollo/client';
 //         }
 //       }
 //     }
-// `
+// `;
+
 export const GET_ME = gql`
-query Me {
+  query Me {
     me {
       _id
       username
@@ -33,4 +34,4 @@ query Me {
       }
     }
   }
-`
+`;
