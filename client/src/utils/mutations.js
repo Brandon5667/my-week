@@ -36,14 +36,6 @@ export const ADD_CHORE = gql`
   }
 `;
 
-/*
-mutation AddChore($choreName: String!, $time: Int!, $score: Int!, $day: Int!) {
-  addChore(choreName: $choreName, time: $time, score: $score, day: $day) {
-    _id
-  }
-}
-*/
-
 export const ADD_SURVEY = gql`
   mutation Mutation(
     $trash: Int!
