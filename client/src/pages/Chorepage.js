@@ -20,10 +20,23 @@ import { ADD_CHORE, COMPLETE_CHORE } from "../utils/mutations";
 //sort by time
 
 const Chorepage = () => {
+  const today = new Date();
+  const todayWeekday = today.getDay();
   // get user data and name data property "userData"
   const { loading, data: userData } = useQuery(GET_ME);
   // get chores from userData
-  const chores = userData?.me?.chores;
+  let chores = userData?.me?.chores;
+  const newChores = () => {
+    if (chores) {
+      const choresCopy = JSON.parse(JSON.stringify(chores));
+      return choresCopy.map((chore) => {
+        chore.position = chore.day < todayWeekday ? chore.day + 7 : chore.day;
+        return chore;
+      });
+    }
+  };
+  console.log(newChores());
+
   const survey = userData?.me?.survey[0];
 
   const days = [
@@ -36,8 +49,6 @@ const Chorepage = () => {
     "Sunday",
   ];
 
-  const today = new Date();
-  const todayWeekday = today.getDay();
   console.log(todayWeekday);
 
   const timeOptions = [];
@@ -177,7 +188,10 @@ const Chorepage = () => {
             {loading ? <h2>Loading...</h2> : <h1>Due Today</h1>}
 
             {chores &&
-              chores
+              newChores()
+                .sort((a, b) => {
+                  return a.position - b.position;
+                })
                 // .filter((chore) => {
                 //   return chore.completed == false && chore.day == todayWeekday;
                 // })
