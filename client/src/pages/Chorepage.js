@@ -187,7 +187,7 @@ const Chorepage = () => {
         </Col>
         <Col xs={12} lg={5}>
           <div>
-            {loading ? <h2>Loading...</h2> : <h1>Due Today</h1>}
+            {loading ? <h2>Loading...</h2> : <h2>Due Today</h2>}
 
             {chores &&
               newChores()
@@ -196,6 +196,37 @@ const Chorepage = () => {
                 })
                 .filter((chore) => {
                   return chore.completed == false && chore.day == todayWeekday;
+                })
+                .map((chore) => {
+                  return (
+                    <Card key={chore._id}>
+                      <Card.Header>{chore.choreName}</Card.Header>
+                      <Card.Body>
+                        <Card.Text>
+                          {days[chore.day - 1]} at{" "}
+                          {chore.time < 13 ? chore.time : chore.time - 12}
+                          {chore.time < 12 || chore.time == 24 ? "am" : "pm"}
+                        </Card.Text>
+                        <Button>Update</Button>
+                        <Button onClick={() => handleCompleteChore(chore._id)}>
+                          Complete
+                        </Button>
+                      </Card.Body>
+                    </Card>
+                  );
+                })}
+
+            {loading ? <h2>Loading...</h2> : <h2>Due Later</h2>}
+
+            {chores &&
+              newChores()
+                .sort((a, b) => {
+                  return a.position - b.position;
+                })
+                .filter((chore) => {
+                  return (
+                    chore.completed == false && !(chore.day == todayWeekday)
+                  );
                 })
                 .map((chore) => {
                   return (
