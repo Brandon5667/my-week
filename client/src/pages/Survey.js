@@ -64,7 +64,8 @@ const Survey = () => {
           id="chore-1"
           aria-label="Default select example"
         >
-          <option value="1">1 Ezy Pezy</option>
+          <option value="" >Choose here</option>
+          <option value="1" >1 Ezy Pezy</option>
           <option value="2">2 Alright, alright!</option>
           <option value="3">3 Indifferent</option>
           <option value="4">4 Sucks</option>
@@ -78,7 +79,8 @@ const Survey = () => {
           id="chore-2"
           aria-label="Default select example"
         >
-          <option value="1">1 Ezy Pezy</option>
+          <option value="" >Choose here</option>
+          <option value="1" >1 Ezy Pezy</option>
           <option value="2">2 Alright, alright!</option>
           <option value="3">3 Indifferent</option>
           <option value="4">4 Sucks</option>
@@ -92,7 +94,8 @@ const Survey = () => {
           id="chore-3"
           aria-label="Default select example"
         >
-          <option value="1">1 Ezy Pezy</option>
+          <option value="" >Choose here</option>
+          <option value="1" >1 Ezy Pezy</option>
           <option value="2">2 Alright, alright!</option>
           <option value="3">3 Indifferent</option>
           <option value="4">4 Sucks</option>
@@ -106,7 +109,8 @@ const Survey = () => {
           id="chore-4"
           aria-label="Default select example"
         >
-          <option value="1">1 Ezy Pezy</option>
+          <option value="" >Choose here</option>
+          <option value="1" >1 Ezy Pezy</option>
           <option value="2">2 Alright, alright!</option>
           <option value="3">3 Indifferent</option>
           <option value="4">4 Sucks</option>
@@ -120,7 +124,8 @@ const Survey = () => {
           id="chore-5"
           aria-label="Default select example"
         >
-          <option value="1">1 Ezy Pezy</option>
+          <option value="" >Choose here</option>
+          <option value="1" >1 Ezy Pezy</option>
           <option value="2">2 Alright, alright!</option>
           <option value="3">3 Indifferent</option>
           <option value="4">4 Sucks</option>
