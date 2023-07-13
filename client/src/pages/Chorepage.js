@@ -1,8 +1,18 @@
 import React, { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
-import { Container, Card, Button, Form, Row, Col } from "react-bootstrap";
+import {
+  Container,
+  Card,
+  Button,
+  Form,
+  Row,
+  Col,
+  Modal,
+} from "react-bootstrap";
 import { GET_ME } from "../utils/queries";
 import { ADD_CHORE, COMPLETE_CHORE } from "../utils/mutations";
+// import { updateChore } from "../components/updateChoreModal";
+import Chores from "../components/Chores";
 
 const Chorepage = () => {
   // get the current weekday – to compare to day property in chores
@@ -15,8 +25,6 @@ const Chorepage = () => {
   const { loading, data: userData } = useQuery(GET_ME);
 
   // get chores from userData
-  const chores = userData?.me?.chores;
-
   const allChores = userData?.me?.chores;
 
   //get today's chores
@@ -30,10 +38,10 @@ const Chorepage = () => {
 
   // get chores that don't fall on today
   const laterChores = () => {
-    if (chores) {
+    if (allChores) {
       const filteredChores = JSON.parse(
         JSON.stringify(
-          chores.filter((chore) => {
+          allChores.filter((chore) => {
             return chore.completed == false && !(chore.day == currentWeekday());
           })
         )
@@ -48,27 +56,6 @@ const Chorepage = () => {
           return a.position - b.position;
         });
     }
-  };
-
-  const displayChores = (chores) => {
-    return chores.map((chore) => {
-      return (
-        <Card key={chore._id}>
-          <Card.Header>{chore.choreName}</Card.Header>
-          <Card.Body>
-            <Card.Text>
-              {days[chore.day - 1]} at{" "}
-              {chore.time < 13 ? chore.time : chore.time - 12}
-              {chore.time < 12 || chore.time == 24 ? "am" : "pm"}
-            </Card.Text>
-            <Button>Update</Button>
-            <Button onClick={() => handleCompleteChore(chore._id)}>
-              Complete
-            </Button>
-          </Card.Body>
-        </Card>
-      );
-    });
   };
 
   const survey = userData?.me?.survey[0];
@@ -104,21 +91,6 @@ const Chorepage = () => {
     day: "",
   });
 
-  // Handling for completing a chore
-  const [completeChore, { error: completeChoreError }] = useMutation(
-    COMPLETE_CHORE,
-    {
-      refetchQueries: [{ query: GET_ME }],
-    }
-  );
-  const handleCompleteChore = async (choreId) => {
-    try {
-      const { data } = await completeChore({ variables: { choreId } });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -132,15 +104,13 @@ const Chorepage = () => {
     refetchQueries: [{ query: GET_ME }],
   });
 
-  const handleFormSubmit = async (event) => {
+  const handleAddChore = async (event) => {
     event.preventDefault();
 
     try {
-      console.log(formState.choreName);
       const score = survey[formState.choreName];
-      console.log("The survey score:", score);
 
-      const { data } = await addChore({
+      await addChore({
         variables: {
           choreName: formState.choreName,
           time: formState.time * 1,
@@ -148,80 +118,103 @@ const Chorepage = () => {
           score: score * 1,
         },
       });
+      setFormState({ choreName: "", time: "", day: "" });
       handleClose();
     } catch (e) {
       console.error(e);
     }
   };
 
+  const [showModal, setShowModal] = useState(false);
+  const handleModalClose = () => setShow(false);
+  const handleModalShow = () => setShow(true);
+  const [updateChoreInfo, setUpdateChoreInfo] = useState({
+    id: "",
+    name: "",
+    day: "",
+    time: "",
+  });
+
   return (
     <div>
+      <updateChore show={showModal} chore={updateChoreInfo} />
       <div className="title">
         <h2>Chore Page</h2>
       </div>
       <Container fluid>
         <Row>
-          <Col xs={12} lg={4}>
+          <Col className="score-addChore" xs={12} lg={4}>
             <h4 id="score-block">Your Score: {score}</h4>
-            <Button type="submit" onClick={handleShow}>
-              ADD CHORE
-            </Button>
-            <br />
-            <div className={show} onHide={handleClose} animation={false}>
-              <Form.Select
-                name="choreName"
-                value={formState.choreName}
-                onChange={handleChange}
-                aria-label="Default select example"
-              >
-                <option>Select a chore</option>
-                <option value="trash">Trash</option>
-                <option value="dishes">Dishes</option>
-                <option value="bathroom">Bathroom</option>
-                <option value="walk">Walk</option>
-                <option value="floor">Floor</option>
-              </Form.Select>
-              <br />
-              <Form.Select
-                name="time"
-                value={formState.time}
-                onChange={handleChange}
-                aria-label="Default select example"
-              >
-                <option>Select a time</option>
-                {timeOptions}
-              </Form.Select>
-              <br />
-              <Form.Select
-                name="day"
-                value={formState.day}
-                onChange={handleChange}
-                aria-label="Default select example"
-              >
-                <option>Select a day</option>
-                {days.map((day, index) => {
-                  return (
-                    <option key={index + 1} value={index + 1}>
-                      {day}
-                    </option>
-                  );
-                })}
-              </Form.Select>
-              <br />
-              <Button variant="primary" onClick={handleFormSubmit}>
-                Save Chore
+            <div className="addChore-form">
+              <Button type="submit" onClick={handleShow}>
+                ADD CHORE
               </Button>
+              <br />
+              <div className={show} onHide={handleClose} animation={false}>
+                <Form.Select
+                  name="choreName"
+                  value={formState.choreName}
+                  onChange={handleChange}
+                  aria-label="Default select example"
+                >
+                  <option>Select a chore</option>
+                  <option value="trash">Trash</option>
+                  <option value="dishes">Dishes</option>
+                  <option value="bathroom">Bathroom</option>
+                  <option value="walk">Walk</option>
+                  <option value="floor">Floor</option>
+                </Form.Select>
+                <br />
+                <Form.Select
+                  name="time"
+                  value={formState.time}
+                  onChange={handleChange}
+                  aria-label="Default select example"
+                >
+                  <option>Select a time</option>
+                  {timeOptions}
+                </Form.Select>
+                <br />
+                <Form.Select
+                  name="day"
+                  value={formState.day}
+                  onChange={handleChange}
+                  aria-label="Default select example"
+                >
+                  <option>Select a day</option>
+                  {days.map((day, index) => {
+                    return (
+                      <option key={index + 1} value={index + 1}>
+                        {day}
+                      </option>
+                    );
+                  })}
+                </Form.Select>
+                <br />
+                <Button variant="primary" onClick={handleAddChore}>
+                  Save Chore
+                </Button>
+              </div>
             </div>
           </Col>
           <Col xs={12} lg={8}>
             <div className="chores">
               {/* Display today's chores */}
               {loading ? <h3>Loading...</h3> : <h3>Due Today</h3>}
-              {allChores && displayChores(todayChores())}
+              {allChores &&
+                (todayChores().length > 0 ? (
+                  <Chores chores={todayChores()} />
+                ) : (
+                  <p>You've completed all of today's chores. Nice!</p>
+                ))}
 
               {/* Display chores due later */}
               {loading ? <h3>Loading...</h3> : <h3>Due Later</h3>}
-              {chores && displayChores(laterChores())}
+              {allChores && laterChores().length > 0 ? (
+                <Chores chores={laterChores()} />
+              ) : (
+                <p>You haven't set any chores for the future yet.</p>
+              )}
             </div>
           </Col>
         </Row>
