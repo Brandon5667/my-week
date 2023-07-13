@@ -1,41 +1,75 @@
 import React, { useState } from "react";
-import ChoreBlock from "../components/ChoreBlock";
-import { Navigate, useParams } from "react-router-dom";
-import Auth from "../utils/auth";
 import { useQuery, useMutation } from "@apollo/client";
-import {
-  Container,
-  Dropdown,
-  Card,
-  ButtonGroup,
-  Button,
-  Modal,
-  Form,
-  Row,
-  Col,
-} from "react-bootstrap";
+import { Container, Card, Button, Form, Row, Col } from "react-bootstrap";
 import { GET_ME } from "../utils/queries";
 import { ADD_CHORE, COMPLETE_CHORE } from "../utils/mutations";
-// import ChorePopup from '../components/ChorePopup';
-//sort by time
 
 const Chorepage = () => {
-  const today = new Date();
-  const todayWeekday = today.getDay();
+  // get the current weekday – to compare to day property in chores
+  const currentWeekday = () => {
+    const today = new Date();
+    return today.getDay();
+  };
+
   // get user data and name data property "userData"
   const { loading, data: userData } = useQuery(GET_ME);
+
   // get chores from userData
-  let chores = userData?.me?.chores;
-  const newChores = () => {
-    if (chores) {
-      const choresCopy = JSON.parse(JSON.stringify(chores));
-      return choresCopy.map((chore) => {
-        chore.position = chore.day < todayWeekday ? chore.day + 7 : chore.day;
-        return chore;
+  const chores = userData?.me?.chores;
+
+  const allChores = userData?.me?.chores;
+
+  //get today's chores
+  const todayChores = () => {
+    if (allChores) {
+      return allChores.filter((chore) => {
+        return chore.completed == false && chore.day == currentWeekday();
       });
     }
   };
-  console.log(newChores());
+
+  // get chores that don't fall on today
+  const laterChores = () => {
+    if (chores) {
+      const filteredChores = JSON.parse(
+        JSON.stringify(
+          chores.filter((chore) => {
+            return chore.completed == false && !(chore.day == currentWeekday());
+          })
+        )
+      );
+      return filteredChores
+        .map((chore) => {
+          chore.position =
+            chore.day < currentWeekday() ? chore.day + 7 : chore.day;
+          return chore;
+        })
+        .sort((a, b) => {
+          return a.position - b.position;
+        });
+    }
+  };
+
+  const displayChores = (chores) => {
+    return chores.map((chore) => {
+      return (
+        <Card key={chore._id}>
+          <Card.Header>{chore.choreName}</Card.Header>
+          <Card.Body>
+            <Card.Text>
+              {days[chore.day - 1]} at{" "}
+              {chore.time < 13 ? chore.time : chore.time - 12}
+              {chore.time < 12 || chore.time == 24 ? "am" : "pm"}
+            </Card.Text>
+            <Button>Update</Button>
+            <Button onClick={() => handleCompleteChore(chore._id)}>
+              Complete
+            </Button>
+          </Card.Body>
+        </Card>
+      );
+    });
+  };
 
   const survey = userData?.me?.survey[0];
   const score = userData?.me?.score;
@@ -49,8 +83,6 @@ const Chorepage = () => {
     "Saturday",
     "Sunday",
   ];
-
-  console.log(todayWeekday);
 
   const timeOptions = [];
   for (var i = 1; i < 25; i++) {
@@ -122,9 +154,6 @@ const Chorepage = () => {
     }
   };
 
-  // run query hear get chores attached to user and sort by time then pass in to ChoreBlock
-  // set up addChore function
-  // add dropdown add chore button create card for adding chore
   return (
     <div>
       <div className="title">
@@ -186,71 +215,13 @@ const Chorepage = () => {
           </Col>
           <Col xs={12} lg={8}>
             <div className="chores">
+              {/* Display today's chores */}
               {loading ? <h3>Loading...</h3> : <h3>Due Today</h3>}
+              {allChores && displayChores(todayChores())}
 
-              {chores &&
-                newChores()
-                  .sort((a, b) => {
-                    return a.position - b.position;
-                  })
-                  .filter((chore) => {
-                    return (
-                      chore.completed == false && chore.day == todayWeekday
-                    );
-                  })
-                  .map((chore) => {
-                    return (
-                      <Card key={chore._id}>
-                        <Card.Header>{chore.choreName}</Card.Header>
-                        <Card.Body>
-                          <Card.Text>
-                            {days[chore.day - 1]} at{" "}
-                            {chore.time < 13 ? chore.time : chore.time - 12}
-                            {chore.time < 12 || chore.time == 24 ? "am" : "pm"}
-                          </Card.Text>
-                          <Button>Update</Button>
-                          <Button
-                            onClick={() => handleCompleteChore(chore._id)}
-                          >
-                            Complete
-                          </Button>
-                        </Card.Body>
-                      </Card>
-                    );
-                  })}
-
+              {/* Display chores due later */}
               {loading ? <h3>Loading...</h3> : <h3>Due Later</h3>}
-
-              {chores &&
-                newChores()
-                  .sort((a, b) => {
-                    return a.position - b.position;
-                  })
-                  .filter((chore) => {
-                    return (
-                      chore.completed == false && !(chore.day == todayWeekday)
-                    );
-                  })
-                  .map((chore) => {
-                    return (
-                      <Card key={chore._id}>
-                        <Card.Header>{chore.choreName}</Card.Header>
-                        <Card.Body>
-                          <Card.Text>
-                            {days[chore.day - 1]} at{" "}
-                            {chore.time < 13 ? chore.time : chore.time - 12}
-                            {chore.time < 12 || chore.time == 24 ? "am" : "pm"}
-                          </Card.Text>
-                          <Button>Update</Button>
-                          <Button
-                            onClick={() => handleCompleteChore(chore._id)}
-                          >
-                            Complete
-                          </Button>
-                        </Card.Body>
-                      </Card>
-                    );
-                  })}
+              {chores && displayChores(laterChores())}
             </div>
           </Col>
         </Row>
