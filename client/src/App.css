@@ -66,6 +66,29 @@
   margin: 1%;
 }
 
+#survey-page > img#survey-raccoon {
+  float:right;
+  position: absolute;
+  left: 18px;
+  
+}
+
+#survey-page > img#survey-raccoon-trash {
+  float:right;
+  position: absolute;
+  right: 24px;
+  
+}
+
+@media (max-width:1000px) {
+  img#survey-raccoon {
+    display: none;
+  }
+  img#survey-raccoon-trash {
+    display: none;
+  }
+}
+
 #survey-submit-button {
   margin:7%;
   font-size: 200%;
@@ -73,10 +96,11 @@
 
 #survey-page {
   text-align: center;
+  margin: 2%;
 }
 
 #survey-form {
-
+  
 }
 
 #survey-form * {
@@ -89,34 +113,71 @@ option {
 }
 
 #chore-1 {
-  width: 25%;
-  height: 20%;
-  font-size: 180%;
-  padding: 1%;
-
-  /* background-color: green; */
+  background-color: rgb(88, 184, 157);
+  color: white;
+  padding: 12px;
+  width: 250px;
+  border: none;
+  border-radius: 25px;
+  font-size: 25px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none;
 }
 
 #chore-2 {
-  width: 20%;
-  font-size: 200%;
-  /* background-color: green; */
+  background-color: rgb(88, 184, 157);
+  color: white;
+  padding: 12px;
+  width: 250px;
+  border: none;
+  border-radius: 25px;
+  font-size: 25px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none;
 }
 #chore-3 {
-  width: 20%;
-  font-size: 200%;
-  /* background-color: green; */
+  background-color: rgb(88, 184, 157);
+  color: white;
+  padding: 12px;
+  width: 250px;
+  border: none;
+  border-radius: 25px;
+  font-size: 25px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none;
 }
 
 #chore-4 {
-  width: 20%;
-  font-size: 200%;
-  /* background-color: green; */
+  background-color: rgb(88, 184, 157);
+  color: white;
+  padding: 12px;
+  width: 250px;
+  border: none;
+  border-radius: 25px;
+  font-size: 25px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none;
 }
 #chore-5 {
-  width: 20%;
-  font-size: 200%;
-  /* background-color: green; */
+  background-color: rgb(88, 184, 157);
+  color: white;
+  padding: 12px;
+  width: 250px;
+  border: none;
+  border-radius: 25px;
+  font-size: 25px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none;
 }
 
 .profile-card {
@@ -163,4 +224,7 @@ option {
   outline: none;
 }
 
-
+#score-block {
+  font-size: 3vh;
+  font-weight: bold;
+}

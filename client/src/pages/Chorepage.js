@@ -38,6 +38,7 @@ const Chorepage = () => {
   console.log(newChores());
 
   const survey = userData?.me?.survey[0];
+  const score = userData?.me?.score;
 
   const days = [
     "Monday",
@@ -129,6 +130,7 @@ const Chorepage = () => {
       <Row>
         <Col>
           <h2>Chore Page</h2>
+          <p id="score-block">Your Score: {score}</p>
         </Col>
       </Row>
       <Row>
