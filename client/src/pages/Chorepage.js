@@ -192,9 +192,9 @@ const Chorepage = () => {
                 .sort((a, b) => {
                   return a.position - b.position;
                 })
-                // .filter((chore) => {
-                //   return chore.completed == false && chore.day == todayWeekday;
-                // })
+                .filter((chore) => {
+                  return chore.completed == false && chore.day == todayWeekday;
+                })
                 .map((chore) => {
                   return (
                     <Card key={chore._id}>
