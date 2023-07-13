@@ -108,7 +108,7 @@ export default function AddChoreModal({ open, handleClose, selectedChore }) {
           day: formState.day * 1,
         },
       });
-      // handleClose();
+      handleClose();
     } catch (e) {
       console.error(e);
     }
