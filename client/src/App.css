@@ -1,22 +1,9 @@
-/* *{
-  background-color:#D6CDBB;
-} */
-/* .footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-}
-
-.footer-image {
-  max-width: 100%;
-  max-height: 100px;
-  width: auto;
-  height: auto;
-} */
-
 .form-select {
   margin: 10px;
+}
+
+.mint-green {
+  background-color: #1ABC9C;
 }
 
 .modal-container {
@@ -225,6 +212,38 @@ option {
 }
 
 #score-block {
-  font-size: 3vh;
   font-weight: bold;
+  background-color: #1ABC9C;
+  border-radius: 10px 10px 0px 0px;
+  padding: 10px;
+}
+
+#score-block, h4 {
+  margin: 0;
+}
+
+.chores {
+  background-color: #B5DDD2;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 40px;
+  max-width: 600px;
+}
+
+.addChore-form {
+  border-radius: 0px 0px 10px 10px;
+  border-left: 2px gray solid;
+  border-right: 2px gray solid;
+  border-bottom: 2px gray solid;
+  margin-bottom: 40px;
+  padding: 10px;
+}
+
+.score-addChore {
+  max-width: 400px;
+}
+
+.card {
+  margin: auto;
+  margin-bottom: 12px; 
 }

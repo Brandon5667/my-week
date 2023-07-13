@@ -64,17 +64,14 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    updateChore: async (
-      parent,
-      { choreId, choreName, time, day, score },
-      context
-    ) => {
+    updateChore: async (parent, { choreId, choreName, time, day }, context) => {
       if (context.user) {
-        await Chore.findByIdAndUpdate(
+        const chore = await Chore.findByIdAndUpdate(
           choreId,
-          { choreName, time, day, score },
+          { choreName, time, day },
           { new: true }
         );
+        return chore;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -90,6 +87,13 @@ const resolvers = {
           { new: true, runValidators: true }
         );
         return user;
+      }
+    },
+
+    deleteChore: async (parents, { choreId }, context) => {
+      if (context.user) {
+        const chore = await Chore.findByIdAndDelete(choreId);
+        return chore;
       }
     },
 
@@ -122,7 +126,7 @@ const resolvers = {
         return deletedUser;
       }
       throw new AuthenticationError("You need to be logged in!");
-    }
+    },
   },
 };
 

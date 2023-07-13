@@ -67,18 +67,32 @@ export const COMPLETE_CHORE = gql`
     }
   }
 `;
-// FIX:
-// export const UPDATE_CHORE = gql`
-//     mutation updateChore( ch) {
-//         updateChore(choreId: $choreId, choreName: $choreName, time: $time) {
-//             _id
-//             choreName
-//             time
-//           }
-//         }
-//     }
-// `;
 
+export const UPDATE_CHORE = gql`
+  mutation UpdateChore(
+    $choreId: ID!
+    $choreName: String
+    $time: Int
+    $day: Int
+  ) {
+    updateChore(
+      choreId: $choreId
+      choreName: $choreName
+      time: $time
+      day: $day
+    ) {
+      _id
+    }
+  }
+`;
+
+export const DELETE_CHORE = gql`
+  mutation DeleteChore($choreId: ID!) {
+    deleteChore(choreId: $choreId) {
+      _id
+    }
+  }
+`;
 
 // delete user mutation
 export const DELETE_USER = gql`
