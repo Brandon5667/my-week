@@ -90,6 +90,13 @@ const resolvers = {
       }
     },
 
+    deleteChore: async (parents, { choreId }, context) => {
+      if (context.user) {
+        const chore = await Chore.findByIdAndDelete(choreId);
+        return chore;
+      }
+    },
+
     addSurvey: async (
       parent,
       { trash, dishes, bathroom, walk, floor },

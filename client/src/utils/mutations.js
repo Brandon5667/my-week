@@ -86,6 +86,14 @@ export const UPDATE_CHORE = gql`
   }
 `;
 
+export const DELETE_CHORE = gql`
+  mutation DeleteChore($choreId: ID!) {
+    deleteChore(choreId: $choreId) {
+      _id
+    }
+  }
+`;
+
 // delete user mutation
 export const DELETE_USER = gql`
   mutation deleteAccount {

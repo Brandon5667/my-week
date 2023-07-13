@@ -49,6 +49,7 @@ const typeDefs = gql`
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     addChore(choreName: String!, time: Int!, score: Int!, day: Int!): Chore
+    deleteChore(choreId: ID!): Chore
     updateChore(choreId: ID!, choreName: String, time: Int, day: Int): Chore
     deleteAccount: User
     login(email: String!, password: String!): Auth

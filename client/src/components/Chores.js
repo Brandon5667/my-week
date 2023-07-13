@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { Card, Button } from "react-bootstrap";
 import { GET_ME } from "../utils/queries";
-import { COMPLETE_CHORE } from "../utils/mutations";
+import { COMPLETE_CHORE, DELETE_CHORE } from "../utils/mutations";
 
 const Chores = ({ chores, handleOpen }) => {
   const days = [
@@ -30,6 +30,18 @@ const Chores = ({ chores, handleOpen }) => {
     }
   };
 
+  const [deleteChore, { error: deleteChoreError }] = useMutation(DELETE_CHORE, {
+    refetchQueries: [{ query: GET_ME }],
+  });
+
+  const handleDeleteChore = async (choreId) => {
+    try {
+      const { data } = await deleteChore({ variables: { choreId } });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return chores.map((chore) => {
     return (
       <Card key={chore._id}>
@@ -52,6 +64,13 @@ const Chores = ({ chores, handleOpen }) => {
               onClick={() => handleCompleteChore(chore._id)}
             >
               Complete
+            </Button>
+            <Button
+              variant="success"
+              size="sm"
+              onClick={() => handleDeleteChore(chore._id)}
+            >
+              Delete
             </Button>
           </div>
         </Card.Body>
