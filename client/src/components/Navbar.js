@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-import Auth from '../utils/auth';
+import Auth from "../utils/auth";
 
 const Navbar = () => {
   const logout = (event) => {
@@ -9,14 +9,14 @@ const Navbar = () => {
     Auth.logout();
   };
   return (
-    <header className="bg-info text-dark mb-4 py-3 display-flex align-center">
+    <header className="mint-green text-dark mb-4 py-3 display-flex align-center">
       <div className="container flex-column justify-space-between-lg justify-center align-center text-center">
         <Link className="text-dark" to="/">
-          <h1 className="m-0" style={{ fontSize: '3rem' }}>
+          <h1 className="m-0" style={{ fontSize: "3rem" }}>
             MyWeek
           </h1>
         </Link>
-        <p className="m-0" style={{ fontSize: '1.75rem', fontWeight: '700' }}>
+        <p className="m-0" style={{ fontSize: "1.75rem", fontWeight: "700" }}>
           A place to organize your week
         </p>
         <div>
@@ -30,9 +30,7 @@ const Navbar = () => {
               </button>
             </>
           ) : (
-            <>
-              
-            </>
+            <></>
           )}
         </div>
       </div>

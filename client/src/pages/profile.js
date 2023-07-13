@@ -41,11 +41,11 @@ const Profile = () => {
           <div className="profile-card">
             <h2 className="profile-heading">Profile</h2>
             <div className="profile-info">
-              <h5 className="form-label">Username:</h5>
+              <label className="form-label">Username:</label>
               <p className="card-text">{username}</p>
             </div>
             <div className="profile-info">
-              <h4 className="form-label">Email:</h4>
+              <label className="form-label">Email:</label>
               <p className="card-text">{email}</p>
             </div>
             <Button

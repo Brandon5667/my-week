@@ -2,6 +2,10 @@
   margin: 10px;
 }
 
+.mint-green {
+  background-color: #1ABC9C;
+}
+
 .modal-container {
   border: 3px solid #000;
 }

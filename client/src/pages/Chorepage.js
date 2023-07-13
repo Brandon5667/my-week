@@ -1,18 +1,10 @@
 import React, { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
-import {
-  Container,
-  Card,
-  Button,
-  Form,
-  Row,
-  Col,
-  Modal,
-} from "react-bootstrap";
+import { Container, Button, Form, Row, Col } from "react-bootstrap";
 import { GET_ME } from "../utils/queries";
-import { ADD_CHORE, COMPLETE_CHORE } from "../utils/mutations";
-// import { updateChore } from "../components/updateChoreModal";
+import { ADD_CHORE } from "../utils/mutations";
 import Chores from "../components/Chores";
+import AddChoreModal from "../components/AddChoreModal";
 
 const Chorepage = () => {
   // get the current weekday – to compare to day property in chores
@@ -81,10 +73,10 @@ const Chorepage = () => {
     );
   }
 
-  const [show, setShow] = useState("hidden");
+  const [visible, setVisible] = useState("hidden");
 
-  const handleClose = () => setShow("hidden");
-  const handleShow = () => setShow("shown");
+  const handleHide = () => setVisible("hidden");
+  const handleReveal = () => setVisible("shown");
   const [formState, setFormState] = useState({
     choreName: "",
     time: "",
@@ -119,25 +111,28 @@ const Chorepage = () => {
         },
       });
       setFormState({ choreName: "", time: "", day: "" });
-      handleClose();
+      handleHide();
     } catch (e) {
       console.error(e);
     }
   };
 
-  const [showModal, setShowModal] = useState(false);
-  const handleModalClose = () => setShow(false);
-  const handleModalShow = () => setShow(true);
-  const [updateChoreInfo, setUpdateChoreInfo] = useState({
-    id: "",
-    name: "",
-    day: "",
-    time: "",
-  });
+  const [selectedChore, setSelectedChore] = useState("");
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = (chore) => {
+    setSelectedChore(chore);
+    setOpen(true);
+  };
+  const handleClose = () => setOpen(false);
 
   return (
     <div>
-      <updateChore show={showModal} chore={updateChoreInfo} />
+      <AddChoreModal
+        open={open}
+        handleClose={handleClose}
+        selectedChore={selectedChore}
+      />
       <div className="title">
         <h2>Chore Page</h2>
       </div>
@@ -146,11 +141,11 @@ const Chorepage = () => {
           <Col className="score-addChore" xs={12} lg={4}>
             <h4 id="score-block">Your Score: {score}</h4>
             <div className="addChore-form">
-              <Button type="submit" onClick={handleShow}>
+              <Button type="submit" onClick={handleReveal}>
                 ADD CHORE
               </Button>
               <br />
-              <div className={show} onHide={handleClose} animation={false}>
+              <div className={visible} onHide={handleHide} animation={false}>
                 <Form.Select
                   name="choreName"
                   value={formState.choreName}
@@ -203,7 +198,7 @@ const Chorepage = () => {
               {loading ? <h3>Loading...</h3> : <h3>Due Today</h3>}
               {allChores &&
                 (todayChores().length > 0 ? (
-                  <Chores chores={todayChores()} />
+                  <Chores chores={todayChores()} handleOpen={handleOpen} />
                 ) : (
                   <p>You've completed all of today's chores. Nice!</p>
                 ))}
@@ -211,7 +206,7 @@ const Chorepage = () => {
               {/* Display chores due later */}
               {loading ? <h3>Loading...</h3> : <h3>Due Later</h3>}
               {allChores && laterChores().length > 0 ? (
-                <Chores chores={laterChores()} />
+                <Chores chores={laterChores()} handleOpen={handleOpen} />
               ) : (
                 <p>You haven't set any chores for the future yet.</p>
               )}
