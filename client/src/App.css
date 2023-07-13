@@ -225,6 +225,14 @@ option {
 }
 
 #score-block {
-  font-size: 3vh;
   font-weight: bold;
+  background-color: #1ABC9C;
+  border-radius: 10px 10px 0px 0px;
+  padding: 10px;
+}
+
+.chores {
+  background-color: #B5DDD2;
+  padding: 10px;
+  border-radius: 10px;
 }

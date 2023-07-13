@@ -126,130 +126,136 @@ const Chorepage = () => {
   // set up addChore function
   // add dropdown add chore button create card for adding chore
   return (
-    <Container fluid>
-      <Row>
-        <Col>
-          <h2>Chore Page</h2>
-          <p id="score-block">Your Score: {score}</p>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={12} lg={5}>
-          <Button type="submit" onClick={handleShow}>
-            ADD CHORE
-          </Button>
-          <br />
-          <div className={show} onHide={handleClose} animation={false}>
-            <Form.Select
-              name="choreName"
-              value={formState.choreName}
-              onChange={handleChange}
-              aria-label="Default select example"
-            >
-              <option>Open this select menu</option>
-              <option value="trash">Trash</option>
-              <option value="dishes">Dishes</option>
-              <option value="bathroom">Bathroom</option>
-              <option value="walk">Walk</option>
-              <option value="floor">Floor</option>
-            </Form.Select>
-            <br />
-            <Form.Select
-              name="time"
-              value={formState.time}
-              onChange={handleChange}
-              aria-label="Default select example"
-            >
-              <option>Select a time</option>
-              {timeOptions}
-            </Form.Select>
-            <br />
-            <Form.Select
-              name="day"
-              value={formState.day}
-              onChange={handleChange}
-              aria-label="Default select example"
-            >
-              <option>Select a day</option>
-              {days.map((day, index) => {
-                return (
-                  <option key={index + 1} value={index + 1}>
-                    {day}
-                  </option>
-                );
-              })}
-            </Form.Select>
-            <br />
-            <Button variant="primary" onClick={handleFormSubmit}>
-              Save Chore
+    <div>
+      <div className="title">
+        <h2>Chore Page</h2>
+      </div>
+      <Container fluid>
+        <Row>
+          <Col xs={12} lg={4}>
+            <h4 id="score-block">Your Score: {score}</h4>
+            <Button type="submit" onClick={handleShow}>
+              ADD CHORE
             </Button>
-          </div>
-        </Col>
-        <Col xs={12} lg={5}>
-          <div>
-            {loading ? <h2>Loading...</h2> : <h2>Due Today</h2>}
-
-            {chores &&
-              newChores()
-                .sort((a, b) => {
-                  return a.position - b.position;
-                })
-                .filter((chore) => {
-                  return chore.completed == false && chore.day == todayWeekday;
-                })
-                .map((chore) => {
+            <br />
+            <div className={show} onHide={handleClose} animation={false}>
+              <Form.Select
+                name="choreName"
+                value={formState.choreName}
+                onChange={handleChange}
+                aria-label="Default select example"
+              >
+                <option>Select a chore</option>
+                <option value="trash">Trash</option>
+                <option value="dishes">Dishes</option>
+                <option value="bathroom">Bathroom</option>
+                <option value="walk">Walk</option>
+                <option value="floor">Floor</option>
+              </Form.Select>
+              <br />
+              <Form.Select
+                name="time"
+                value={formState.time}
+                onChange={handleChange}
+                aria-label="Default select example"
+              >
+                <option>Select a time</option>
+                {timeOptions}
+              </Form.Select>
+              <br />
+              <Form.Select
+                name="day"
+                value={formState.day}
+                onChange={handleChange}
+                aria-label="Default select example"
+              >
+                <option>Select a day</option>
+                {days.map((day, index) => {
                   return (
-                    <Card key={chore._id}>
-                      <Card.Header>{chore.choreName}</Card.Header>
-                      <Card.Body>
-                        <Card.Text>
-                          {days[chore.day - 1]} at{" "}
-                          {chore.time < 13 ? chore.time : chore.time - 12}
-                          {chore.time < 12 || chore.time == 24 ? "am" : "pm"}
-                        </Card.Text>
-                        <Button>Update</Button>
-                        <Button onClick={() => handleCompleteChore(chore._id)}>
-                          Complete
-                        </Button>
-                      </Card.Body>
-                    </Card>
+                    <option key={index + 1} value={index + 1}>
+                      {day}
+                    </option>
                   );
                 })}
+              </Form.Select>
+              <br />
+              <Button variant="primary" onClick={handleFormSubmit}>
+                Save Chore
+              </Button>
+            </div>
+          </Col>
+          <Col xs={12} lg={8}>
+            <div className="chores">
+              {loading ? <h3>Loading...</h3> : <h3>Due Today</h3>}
 
-            {loading ? <h2>Loading...</h2> : <h2>Due Later</h2>}
+              {chores &&
+                newChores()
+                  .sort((a, b) => {
+                    return a.position - b.position;
+                  })
+                  .filter((chore) => {
+                    return (
+                      chore.completed == false && chore.day == todayWeekday
+                    );
+                  })
+                  .map((chore) => {
+                    return (
+                      <Card key={chore._id}>
+                        <Card.Header>{chore.choreName}</Card.Header>
+                        <Card.Body>
+                          <Card.Text>
+                            {days[chore.day - 1]} at{" "}
+                            {chore.time < 13 ? chore.time : chore.time - 12}
+                            {chore.time < 12 || chore.time == 24 ? "am" : "pm"}
+                          </Card.Text>
+                          <Button>Update</Button>
+                          <Button
+                            onClick={() => handleCompleteChore(chore._id)}
+                          >
+                            Complete
+                          </Button>
+                        </Card.Body>
+                      </Card>
+                    );
+                  })}
 
-            {chores &&
-              newChores()
-                .sort((a, b) => {
-                  return a.position - b.position;
-                })
-                .filter((chore) => {
-                  return (
-                    chore.completed == false && !(chore.day == todayWeekday)
-                  );
-                })
-                .map((chore) => {
-                  return (
-                    <Card key={chore._id}>
-                      <Card.Header>{chore.choreName}</Card.Header>
-                      <Card.Body>
-                        <Card.Text>
-                          {days[chore.day - 1]} at{" "}
-                          {chore.time < 13 ? chore.time : chore.time - 12}
-                          {chore.time < 12 || chore.time == 24 ? "am" : "pm"}
-                        </Card.Text>
-                        <Button>Update</Button>
-                        <Button onClick={() => handleCompleteChore(chore._id)}>
-                          Complete
-                        </Button>
-                      </Card.Body>
-                    </Card>
-                  );
-                })}
-          </div>
-        </Col>
-      </Row>
-    </Container>
+              {loading ? <h3>Loading...</h3> : <h3>Due Later</h3>}
+
+              {chores &&
+                newChores()
+                  .sort((a, b) => {
+                    return a.position - b.position;
+                  })
+                  .filter((chore) => {
+                    return (
+                      chore.completed == false && !(chore.day == todayWeekday)
+                    );
+                  })
+                  .map((chore) => {
+                    return (
+                      <Card key={chore._id}>
+                        <Card.Header>{chore.choreName}</Card.Header>
+                        <Card.Body>
+                          <Card.Text>
+                            {days[chore.day - 1]} at{" "}
+                            {chore.time < 13 ? chore.time : chore.time - 12}
+                            {chore.time < 12 || chore.time == 24 ? "am" : "pm"}
+                          </Card.Text>
+                          <Button>Update</Button>
+                          <Button
+                            onClick={() => handleCompleteChore(chore._id)}
+                          >
+                            Complete
+                          </Button>
+                        </Card.Body>
+                      </Card>
+                    );
+                  })}
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 };
 

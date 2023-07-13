@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -24,8 +26,25 @@ root {
   width: 100%;
 }
 
-h2 {
+.title h2 {
+  font-weight: 600;
+  display: inline-block;
+  border: 2px solid black;
+  padding: 10px;
+  border-radius: 25px;
+}
+
+h3 {
   text-decoration: underline;
+}
+
+.title {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.col {
+  margin: auto;
 }
 
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
@@ -393,19 +412,25 @@ body {
   color: #1a1a1a;
 }
 
-h1,
+h1 {
+  font-family: 'Paytone One', sans-serif;
+  font-weight: 900;
+  margin: 0 0 0.5rem;
+  line-height: 1.25;
+}
+
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Paytone One', sans-serif;
+  font-weight: 500;
   margin: 0 0 0.5rem;
-  line-height: 1.25;
 }
 
 h1 {
-  font-size: 2.25rem;
+  font-size: 4rem;
 }
 
 h2 {

@@ -1,7 +1,7 @@
-import React from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import Auth from '../utils/auth';
+import React from "react";
+import { Container, Row, Col, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import Auth from "../utils/auth";
 
 const HomePage = () => {
   const logout = (event) => {
@@ -13,9 +13,14 @@ const HomePage = () => {
     <Container className="d-flex justify-content-center align-items-center">
       <Row noGutters>
         <Col className="text-center" xs={12} md={6}>
-          <h1>MyWeek</h1>
+          <h2>MyWeek</h2>
           <p>
-            Tired of traditional chore management methods that lack motivation and excitement? MyWeek brings a refreshing twist by introducing a points-based system, allowing you to assign points to each chore based on its difficulty or importance. By adding an element of competition, MyWeek encourages users to strive for excellence and surpass their own expectations.
+            Tired of traditional chore management methods that lack motivation
+            and excitement? MyWeek brings a refreshing twist by introducing a
+            points-based system, allowing you to assign points to each chore
+            based on its difficulty or importance. By adding an element of
+            competition, MyWeek encourages users to strive for excellence and
+            surpass their own expectations.
           </p>
         </Col>
         <Col className="text-right" xs={12} md={6}>
