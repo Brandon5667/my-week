@@ -113,12 +113,17 @@ option {
 }
 
 #chore-1 {
-  width: 25%;
-  height: 20%;
-  font-size: 180%;
-  padding: 1%;
-  
-  /* background-color: green; */
+  background-color: rgb(88, 184, 157);
+  color: white;
+  padding: 12px;
+  width: 250px;
+  border: none;
+  border-radius: 25px;
+  font-size: 25px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none;
 }
 
 #chore-2 {
@@ -219,4 +224,7 @@ option {
   outline: none;
 }
 
-
+#score-block {
+  font-size: 3vh;
+  font-weight: bold;
+}
